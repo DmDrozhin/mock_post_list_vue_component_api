@@ -7,14 +7,6 @@
       type="text"
       id="text_input"
       :placeholder="label"
-      :value="textInputValue"
-      @input="updateInput"
-      :style="`height: ${height}rem`"
-    />
-    <input
-      type="text"
-      id="text_input"
-      :placeholder="label"
       v-model.trim.lazy="enteredData"
       :style="`height: ${height}rem`"
     />

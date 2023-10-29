@@ -11,7 +11,7 @@
         :height="2.5"
         :clearForm="isTimeToClearFrom"
         @changed="newPost.title = $event"
-        @filedCleared="isTimeToClearFrom = false"
+        @filedCleared="setTimeToClearFrom"
       />
       <TextArea
         class="text-area"
@@ -20,7 +20,7 @@
         :cols="50"
         :clearForm="isTimeToClearFrom"
         @changed="newPost.body = $event"
-        @filedCleared="isTimeToClearFrom = false"
+        @filedCleared="setTimeToClearFrom"
       />
 
       <CommonButton class="btn" @buttonAction="toNewPost"
@@ -52,6 +52,11 @@ export default {
       } else {
         this.alertMessage = '! Please fill out text fields !'
         return
+      }
+    },
+    setTimeToClearFrom() {
+      if (this.isTimeToClearFrom) {
+        this.isTimeToClearFrom = false
       }
     },
   },
