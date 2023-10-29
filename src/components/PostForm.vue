@@ -10,7 +10,7 @@
         :label="'Post title'"
         :height="2.5"
         :clearForm="isTimeToClearFrom"
-        v-model="newPost.title"
+        @changed="newPost.title = $event"
         @filedCleared="isTimeToClearFrom = false"
       />
       <TextArea

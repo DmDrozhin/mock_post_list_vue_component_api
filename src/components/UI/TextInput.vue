@@ -11,13 +11,13 @@
       @input="updateInput"
       :style="`height: ${height}rem`"
     />
-    <!-- <input
+    <input
       type="text"
       id="text_input"
       :placeholder="label"
       v-model.trim.lazy="enteredData"
       :style="`height: ${height}rem`"
-    /> -->
+    />
   </div>
 </template>
 
@@ -35,10 +35,9 @@ export default {
     }
   },
   watch: {
-    // enteredData(d) {
-    //   this.$emit('changed', d, Event)
-    //   console.log(`this is text input: ${d}`)
-    // },
+    enteredData(d) {
+      this.$emit('changed', d)
+    },
     clearForm(b) {
       if (b) {
         this.enteredData = ''
@@ -46,11 +45,7 @@ export default {
       }
     },
   },
-  methods: {
-    updateInput(ev) {
-      this.$emit('update:textInputValue', ev.target.value)
-    },
-  },
+  methods: {},
 }
 </script>
 
