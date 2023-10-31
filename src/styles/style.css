@@ -1,0 +1,46 @@
+  :root {    
+    --main-bg-color: #565656;
+    --btn-bg-color: #9d93e1;
+    --btn-bg-color-hover:  #685ea9;
+    --alert-txt-color:  rgb(255, 129, 154);
+    --hr-color: #7d9e43;
+  }
+  
+  * {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* background-color: #b6b6b6; */
+    /* min-height: 100vh; */
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.3rem;
+  }
+  h2 {
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+  }
+
+  .flex-jcsb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .flex-jcc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .spacer {
+    display: block;
+    height: 1rem;
+    width: 100%;
+    background: linear-gradient(to right, #7d9e43, var(--btn-bg-color-hover), #8f9487);
+  }

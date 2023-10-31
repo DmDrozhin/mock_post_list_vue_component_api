@@ -7,17 +7,10 @@
       type="text"
       id="text_input"
       :placeholder="label"
-      :value="textInputValue"
-      @input="updateInput"
+      :value="title"
+      @change="updateInput"
       :style="`height: ${height}rem`"
     />
-    <!-- <input
-      type="text"
-      id="text_input"
-      :placeholder="label"
-      v-model.trim.lazy="enteredData"
-      :style="`height: ${height}rem`"
-    /> -->
   </div>
 </template>
 
@@ -27,28 +20,15 @@ export default {
   props: {
     label: { type: String, default: '' },
     height: { type: Number, default: 3 },
-    clearForm: { type: Boolean, default: false },
+    title: { type: String || Number, default: String },
   },
   data() {
-    return {
-      enteredData: '',
-    }
+    return {}
   },
-  watch: {
-    // enteredData(d) {
-    //   this.$emit('changed', d, Event)
-    //   console.log(`this is text input: ${d}`)
-    // },
-    clearForm(b) {
-      if (b) {
-        this.enteredData = ''
-        this.$emit('filedCleared')
-      }
-    },
-  },
+  watch: {},
   methods: {
     updateInput(ev) {
-      this.$emit('update:textInputValue', ev.target.value)
+      this.$emit('update:title', ev.target.value)
     },
   },
 }

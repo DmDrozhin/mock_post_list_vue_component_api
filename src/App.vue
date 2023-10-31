@@ -1,25 +1,51 @@
 <template>
-  <div class="container">
+  <div class="container" :class="{ inactive: isShowModal }">
     <h1>{{ title }}</h1>
-    <hr />
-    <post-form @newPost="addNewPost($event)"></post-form>
+    <div class="spacer"></div>
+    <transition tag="div" name="modal">
+      <modal-wind v-if="isShowModal">
+        <div class="post-form-wrapper">
+          <post-form
+            @newPost="addNewPost($event)"
+            @closeModal="isShowModal = false"
+          ></post-form>
+        </div>
+      </modal-wind>
+    </transition>
     <br />
-    <hr />
-    <h2>POSTS</h2>
+    <div class="flex-jcsb">
+      <h2>POSTS</h2>
+      <common-button @click="isShowModal = !isShowModal"
+        >Create new post
+      </common-button>
+    </div>
     <br />
-    <post-list :posts="posts" @deletePost="deletePost($event)"></post-list>
+    <div>
+      <post-list :posts="posts" @deletePost="deletePost($event)"></post-list>
+    </div>
+    <div>
+      <h2 v-if="posts.length <= 0" id="alert-msg">The post list is empty</h2>
+    </div>
   </div>
 </template>
 
 <script>
 import PostForm from './components/PostForm.vue'
 import PostList from './components/PostList.vue'
+import CommonButton from './components/UI/CommonButton.vue'
+import ModalWind from './components/UI/ModalWind.vue'
 export default {
-  components: { PostForm, PostList },
+  components: { PostForm, PostList, ModalWind, CommonButton },
   name: 'App',
   data() {
     return {
       title: 'Blog. Info posts',
+      isShowModal: false,
+      inactive: [
+        { pointerEvents: 'none' },
+        { overflow: 'hidden' },
+        { cursor: 'not-allowed' },
+      ],
       posts: [
         {
           id: 1,
@@ -51,45 +77,71 @@ export default {
         this.posts.push(ev)
       }
     },
-    deletePost(id) {
-      const index = this.posts.findIndex(p => p.id === id)
-      if (index !== -1) {
-        this.posts.splice(index, 1)
+    deletePost(post) {
+      const conf = confirm('Do you really want to delete the post?')
+      if (conf) {
+        this.posts = this.posts.filter(p => p.id !== post.id)
       }
     },
   },
 }
 </script>
 
-<style>
-* {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /* background-color: #b6b6b6; */
-  /* min-height: 100vh; */
-  scroll-behavior: smooth;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
+<style scoped>
+@import './styles/style.css';
+h1 {
+  position: relative;
+  display: inline-block;
 }
-
+h1::after {
+  content: '';
+  display: block;
+  position: absolute;
+  right: -25px;
+  top: 0;
+  width: 15px;
+  height: 100%;
+  background-color: coral;
+}
 .container {
   height: 100vh;
   padding: 1rem;
   max-width: 1280px;
   margin: 0 auto;
-  background-color: #565656;
+  background-color: var(--main-bg-color);
+  /* background-color: #565656; */
   color: #fff;
 }
-
-h1 {
-  font-size: 2.5rem;
-  letter-spacing: 0.3rem;
+.container.inactive {
+  pointer-events: none;
+  overflow: hidden;
 }
-h2 {
-  font-size: 2rem;
-  letter-spacing: 0.2rem;
+.spacer {
+  margin: 1rem 0;
+}
+h2#alert-msg {
+  color: coral;
+}
+.flex-jcsb {
+  max-width: 30vw;
+}
+.post-form-wrapper {
+  position: fixed;
+  z-index: 99;
+  pointer-events: all;
+  cursor: default;
+}
+.modal {
+  /* display: inline-block; */
+  /* margin-right: 10px; */
+}
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 1s ease;
+}
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+  /* transform: translateY(30px); */
 }
 </style>

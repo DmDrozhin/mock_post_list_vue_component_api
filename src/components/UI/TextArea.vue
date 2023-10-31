@@ -5,7 +5,8 @@
     </label>
     <textarea
       id="text_area"
-      v-model.trim.lazy="enteredData"
+      :value="body"
+      @change="updateInput"
       :placeholder="label"
       :rows="rows"
       :cols="cols"
@@ -20,25 +21,18 @@ export default {
     label: { type: String, default: '' },
     rows: { type: Number, default: 5 },
     cols: { type: Number, default: 33 },
-    clearForm: { type: Boolean, default: false },
+    body: { type: String || Number, default: String },
   },
   data() {
-    return {
-      enteredData: '',
-    }
+    return {}
   },
-  watch: {
-    enteredData(d) {
-      this.$emit('changed', d)
-    },
-    clearForm(b) {
-      if (b) {
-        this.enteredData = ''
-        this.$emit('filedCleared')
-      }
+  watch: {},
+  methods: {
+    updateInput(ev) {
+      this.$emit('update:body', ev.target.value)
+      console.log(ev.target)
     },
   },
-  methods: {},
 }
 </script>
 
