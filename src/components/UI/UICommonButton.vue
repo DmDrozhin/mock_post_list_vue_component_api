@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'CommonButton',
+  name: 'UICommonButton',
   data() {
     return {}
   },
@@ -36,6 +36,7 @@ export default {
   background-color: var(--btn-bg-color-hover);
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  cursor: pointer;
 }
 .btn-common:hover::after {
   position: absolute;

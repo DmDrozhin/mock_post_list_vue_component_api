@@ -1,26 +1,27 @@
 <template>
   <div>
-    <label for="text_input">
+    <label for="text_area">
       <h3>{{ label }}</h3>
     </label>
-    <input
-      type="text"
-      id="text_input"
-      :placeholder="label"
-      :value="title"
+    <textarea
+      id="text_area"
+      :value="body"
       @change="updateInput"
-      :style="`height: ${height}rem`"
-    />
+      :placeholder="label"
+      :rows="rows"
+      :cols="cols"
+    ></textarea>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TextInput',
+  name: 'UITextArea',
   props: {
     label: { type: String, default: '' },
-    height: { type: Number, default: 3 },
-    title: { type: String || Number, default: String },
+    rows: { type: Number, default: 5 },
+    cols: { type: Number, default: 33 },
+    body: { type: String || Number, default: String },
   },
   data() {
     return {}
@@ -28,7 +29,8 @@ export default {
   watch: {},
   methods: {
     updateInput(ev) {
-      this.$emit('update:title', ev.target.value)
+      this.$emit('update:body', ev.target.value)
+      console.log(ev.target)
     },
   },
 }
@@ -38,14 +40,14 @@ export default {
 label {
   letter-spacing: 1px;
 }
-input {
+textarea {
   border: none;
   padding: 0 1rem;
   min-width: 100%;
   border-radius: 0.3rem;
   position: relative;
 }
-input:focus {
+textarea:focus {
   border: none;
   outline: none;
   border-top-right-radius: 0;

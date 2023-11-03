@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'DeleteButton',
+  name: 'UIDeleteButton',
   data() {
     return {}
   },
@@ -16,25 +16,24 @@ export default {
 <style scoped>
 .btn-delete {
   box-sizing: content-box;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   background-color: transparent;
-  border: 2px solid #fff;
+  border: 1.5px solid #fff;
   color: #fff;
   position: relative;
+  cursor: pointer;
 }
 .btn-delete:hover:after {
   content: '';
   display: block;
   position: absolute;
   top: -2px;
-  right: -12px;
-  width: 4px;
-  height: 36px;
+  right: -9px;
+  width: 7px;
+  height: 115%;
   background-color: coral;
-  border-right: 5px solid coral;
-  /* box-shadow: 1px 1px 5px rgb(22, 22, 22); */
 }
 </style>

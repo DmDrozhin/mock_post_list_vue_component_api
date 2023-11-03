@@ -7,7 +7,7 @@
       <div>{{ post.body }}</div>
     </div>
     <div class="btn-wrapper">
-      <DeleteButton @click="$emit('deletePost')" />
+      <UIDeleteButton @click="$emit('deletePost')" />
     </div>
   </div>
 </template>

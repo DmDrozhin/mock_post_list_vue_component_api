@@ -18,6 +18,15 @@
     text-rendering: optimizeSpeed;
     line-height: 1.5;
   }
+  .container {
+    height: 100vh;
+    padding: 1rem;
+    max-width: 1280px;
+    margin: 0 auto;
+    background-color: var(--main-bg-color);
+    /* background-color: #565656; */
+    color: #fff;
+  }
 
   h1 {
     font-size: 2.5rem;
@@ -26,6 +35,10 @@
   h2 {
     font-size: 2rem;
     letter-spacing: 0.2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+    letter-spacing: 0.1rem;
   }
 
   .flex-jcsb {
@@ -36,6 +49,16 @@
   .flex-jcc {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+  .flex-jcl {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+  .flex-jcr {
+    display: flex;
+    justify-content: right;
     align-items: center;
   }
   .spacer {

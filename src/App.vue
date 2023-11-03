@@ -1,30 +1,53 @@
 <template>
-  <div class="container" :class="{ inactive: isShowModal }">
-    <h1>{{ title }}</h1>
+  <div class="container" :class="{ inactive: isModalShow }">
+    <h1>{{ title.toUpperCase() }}</h1>
     <div class="spacer"></div>
-    <transition tag="div" name="modal">
-      <modal-wind v-if="isShowModal">
+    <transition name="modal" tag="div">
+      <UIModalWind v-if="isModalShow">
         <div class="post-form-wrapper">
           <post-form
             @newPost="addNewPost($event)"
-            @closeModal="isShowModal = false"
+            @closeModal="isModalShow = false"
           ></post-form>
         </div>
-      </modal-wind>
+      </UIModalWind>
     </transition>
     <br />
-    <div class="flex-jcsb">
-      <h2>POSTS</h2>
-      <common-button @click="isShowModal = !isShowModal"
-        >Create new post
-      </common-button>
+    <div class="handling-blocks-wrapper flex-jcsb">
+      <div class="handling-block-1 flex-jcl">
+        <h2 class="handling-block-1__title">POSTS</h2>
+        <UICommonButton
+          @click="isModalShow = !isModalShow"
+          class="handling-block-1__btn"
+          >Create new post
+        </UICommonButton>
+        <UIAnimatedLoader
+          v-if="isLoading"
+          class="handling-block-1__loader"
+        ></UIAnimatedLoader>
+      </div>
+      <div class="handling-block-2 flex-jcr">
+        <UISearchInput
+          v-model:search="searchTXT"
+          class="handling-block-2__search"
+        />
+        <UISelectOption
+          v-model:selectedValue="selected"
+          :options="optionsArr"
+          class="handling-block-2__select"
+        />
+      </div>
     </div>
     <br />
     <div>
-      <post-list :posts="posts" @deletePost="deletePost($event)"></post-list>
+      <post-list
+        v-if="!isLoading"
+        :posts="filteredPostList"
+        @deletePost="deletePost($event)"
+      ></post-list>
     </div>
     <div>
-      <h2 v-if="posts.length <= 0" id="alert-msg">The post list is empty</h2>
+      <h3 v-if="posts.length <= 0" id="alert-msg">Post list is empty</h3>
     </div>
   </div>
 </template>
@@ -32,43 +55,54 @@
 <script>
 import PostForm from './components/PostForm.vue'
 import PostList from './components/PostList.vue'
-import CommonButton from './components/UI/CommonButton.vue'
-import ModalWind from './components/UI/ModalWind.vue'
+import axios from 'axios'
+
 export default {
-  components: { PostForm, PostList, ModalWind, CommonButton },
+  components: { PostForm, PostList },
   name: 'App',
   data() {
     return {
-      title: 'Blog. Info posts',
-      isShowModal: false,
+      title: 'Mock post-list',
+      isModalShow: false,
       inactive: [
         { pointerEvents: 'none' },
         { overflow: 'hidden' },
         { cursor: 'not-allowed' },
       ],
-      posts: [
-        {
-          id: 1,
-          title: 'What is Lorem Ipsum?',
-          body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.",
-        },
-        {
-          id: 2,
-          title: 'Where does it come from?',
-          body: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur.',
-        },
-        {
-          id: 3,
-          title: 'Why do we use it?',
-          body: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
-        },
-        {
-          id: 4,
-          title: 'Where can I get some?',
-          body: "here are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.",
-        },
+      posts: [],
+      isLoading: true,
+      selected: 'title',
+      optionsArr: [
+        { prop: 'title', name: 'By title' },
+        { prop: 'id', name: 'By ID' },
+        { prop: 'body', name: 'By body' },
       ],
+      searchTXT: '',
     }
+  },
+  computed: {
+    sortedPostList() {
+      const option = this.selected
+      const sortString = (a, b) => a[option].localeCompare(b[option])
+      const sortNum = (a, b) => a[option] - b[option]
+      const arr = [...this.posts]
+      if (option === 'id') {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        return arr.sort(sortNum)
+      } else {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        return arr.sort(sortString)
+      }
+    },
+    // eslint-disable-next-line vue/return-in-computed-property
+    filteredPostList() {
+      const query = this.searchTXT.toLowerCase()
+      if (query) {
+        return this.sortedPostList.filter(post =>
+          post.title.toLowerCase().includes(query)
+        )
+      } else return this.sortedPostList
+    },
   },
   methods: {
     addNewPost(ev) {
@@ -83,6 +117,23 @@ export default {
         this.posts = this.posts.filter(p => p.id !== post.id)
       }
     },
+    async fetchPosts() {
+      try {
+        this.isLoading = true
+        setTimeout(async () => {
+          const resp = await axios.get(
+            'https://jsonplaceholder.typicode.com/posts?_limit=10'
+          )
+          this.posts = resp.data
+          this.isLoading = false
+        }, 1000)
+      } catch (er) {
+        throw new Error(`Fetching error: ${er}`)
+      }
+    },
+  },
+  mounted() {
+    this.fetchPosts()
   },
 }
 </script>
@@ -103,15 +154,6 @@ h1::after {
   height: 100%;
   background-color: coral;
 }
-.container {
-  height: 100vh;
-  padding: 1rem;
-  max-width: 1280px;
-  margin: 0 auto;
-  background-color: var(--main-bg-color);
-  /* background-color: #565656; */
-  color: #fff;
-}
 .container.inactive {
   pointer-events: none;
   overflow: hidden;
@@ -119,29 +161,62 @@ h1::after {
 .spacer {
   margin: 1rem 0;
 }
-h2#alert-msg {
+h3#alert-msg {
   color: coral;
+  text-align: center;
+  margin-top: 2rem;
 }
-.flex-jcsb {
-  max-width: 30vw;
+.handling-block-1 {
+  flex: 1 0 50%;
+}
+.handling-block-1__title {
+  flex: 0 0 150px;
+}
+.handling-block-1__btn {
+  flex: 0 0 180px;
+}
+.handling-block-1__loader {
+  flex: 1 0 auto;
+  margin-left: 2rem;
+}
+.handling-block-2 {
+  flex: 1 0 auto;
+  gap: 1rem;
+}
+.handling-block-2__search {
+  flex: 0 0 60%;
+}
+.handling-block-2__select {
+  flex: 1 0 auto;
+  position: relative;
+}
+.handling-block-2__select:hover:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 104%;
+  top: -1px;
+  right: 20px;
+  background-color: coral;
 }
 .post-form-wrapper {
   position: fixed;
   z-index: 99;
   pointer-events: all;
-  cursor: default;
+  cursor: cross;
 }
-.modal {
-  /* display: inline-block; */
-  /* margin-right: 10px; */
-}
+/* .modal {
+  display: inline-block;
+  margin-right: 10px;
+} */
 .modal-enter-active,
 .modal-leave-active {
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 .modal-enter-from,
 .modal-leave-to {
   opacity: 0;
-  /* transform: translateY(30px); */
+  transform: translateX(100%);
 }
 </style>
