@@ -21,6 +21,7 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "axios": "^1.6.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -42,15 +43,17 @@
       "requireConfigFile": false
     },
     "rules": {
+      "vue/multi-word-component-names": 0,
+      "vue/no-v-model-argument": 0
     }
   },
-  "prettier":{
+  "prettier": {
     "tabWidth": 2,
     "singleQuote": true,
     "jsxSingleQuote": true,
     "arrowParens": "avoid",
     "semi": false,
-    "endOfLine": "auto"
+    "endOfLine": "auto"    
   },
   "browserslist": [
     "> 1%",

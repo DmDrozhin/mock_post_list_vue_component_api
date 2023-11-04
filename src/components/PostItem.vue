@@ -7,7 +7,7 @@
       <div>{{ post.body }}</div>
     </div>
     <div class="btn-wrapper">
-      <DeleteButton @deleteItem="deletePost(post.id, post.title)" />
+      <UIDeleteButton @click="$emit('deletePost')" />
     </div>
   </div>
 </template>
@@ -20,15 +20,14 @@ export default {
     return {}
   },
   methods: {
-    aksUser(title) {
-      return confirm(`Do you want to delete the post: *** ${title} ***?`)
-    },
-    deletePost(id, title) {
-      if (this.aksUser(title)) {
-        this.$emit('deletePost', id)
-        alert('The post has been deleted!')
-      }
-    },
+    // aksUser(title) {
+    //   return confirm(`Do you want to delete the post: *** ${title} ***?`)
+    // },
+    // deletePost(id, title) {
+    //   if (this.aksUser(title)) {
+    //     this.$emit('deletePost', id)
+    //   }
+    // },
   },
 }
 </script>

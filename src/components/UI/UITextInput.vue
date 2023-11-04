@@ -1,26 +1,25 @@
 <template>
   <div>
-    <label for="text_area">
+    <label for="text_input">
       <h3>{{ label }}</h3>
     </label>
-    <textarea
-      id="text_area"
-      v-model.trim.lazy="enteredData"
+    <input
+      type="text"
+      id="text_input"
       :placeholder="label"
-      :rows="rows"
-      :cols="cols"
-    ></textarea>
+      v-model.trim.lazy="enteredData"
+      :style="`height: ${height}rem`"
+    />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TextArea',
+  name: 'UITextInput',
   props: {
     label: { type: String, default: '' },
-    rows: { type: Number, default: 5 },
-    cols: { type: Number, default: 33 },
-    clearForm: { type: Boolean, default: false },
+    height: { type: Number, default: 3 },
+    title: { type: String || Number, default: String },
   },
   data() {
     return {
@@ -46,14 +45,14 @@ export default {
 label {
   letter-spacing: 1px;
 }
-textarea {
+input {
   border: none;
   padding: 0 1rem;
   min-width: 100%;
   border-radius: 0.3rem;
   position: relative;
 }
-textarea:focus {
+input:focus {
   border: none;
   outline: none;
   border-top-right-radius: 0;

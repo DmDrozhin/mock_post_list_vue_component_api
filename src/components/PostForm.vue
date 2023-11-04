@@ -1,11 +1,14 @@
 <template>
-  <div>
+  <div class="new-post">
+    <UIDeleteButton @click="$emit('closeModal')" class="new-post__del-btn" />
+    <h2>New post</h2>
     <div class="alert-div">
       <p class="alert-msg">{{ alertMessage }}</p>
     </div>
-    <hr />
-    <form class="post-form" @submit.prevent>
-      <TextInput
+    <hr style="margin: 0 0 1rem 0" />
+    <form class="new-post__post-form" @submit.prevent name="post-form">
+      <UITextInput
+        v-model:title="newPost.title"
         class="text-input"
         :label="'Post title'"
         :height="2.5"
@@ -13,7 +16,8 @@
         @changed="newPost.title = $event"
         @filedCleared="setTimeToClearFrom"
       />
-      <TextArea
+      <UITextArea
+        v-model:body="newPost.body"
         class="text-area"
         :label="'Post message'"
         :rows="4"
@@ -23,32 +27,28 @@
         @filedCleared="setTimeToClearFrom"
       />
 
-      <CommonButton class="btn" @buttonAction="toNewPost"
-        >Create post</CommonButton
+      <UICommonButton class="btn" @buttonAction="makeNewPost"
+        >Create post</UICommonButton
       >
     </form>
   </div>
 </template>
 
 <script>
-import TextInput from './UI/TextInput.vue'
 export default {
-  components: { TextInput },
   name: 'PostForm',
   data() {
     return {
-      newPost: { id: '', title: '', body: '' },
+      newPost: { id: { type: Number, required: true }, title: '', body: '' },
       alertMessage: '',
-      isTimeToClearFrom: false,
     }
   },
   methods: {
-    toNewPost() {
+    makeNewPost() {
       this.alertMessage = ''
       if (this.newPost.title && this.newPost.body) {
         this.$emit('newPost', this.newPost)
         this.newPost = { id: '', title: '', body: '' }
-        this.isTimeToClearFrom = true
       } else {
         this.alertMessage = '! Please fill out text fields !'
         return
@@ -64,18 +64,30 @@ export default {
 </script>
 
 <style scoped>
+@import '@/styles/style.css';
+.new-post {
+  position: relative;
+  border: 1px solid #fff;
+  padding: 2rem;
+  background-color: var(--main-bg-color);
+}
+.new-post__del-btn {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
 .alert-div {
   height: 2rem;
 }
 .alert-msg {
-  color: rgb(255, 129, 154);
+  color: var(--alert-txt-color);
   font-size: 1.2rem;
   font-weight: 600;
 }
-.post-form {
+.new-post__post-form {
   display: flex;
   flex-direction: column;
-  max-width: 50%;
+  width: 25rem;
 }
 .text-input {
   margin-bottom: 1rem;
