@@ -1,5 +1,9 @@
 <template>
-  <div class="container" :class="{ inactive: isModalShow }">
+  <div
+    class="container"
+    :class="{ inactive: isModalShow }"
+    @click.capture="clickTarget = $event.target.className"
+  >
     <h1>{{ title.toUpperCase() }}</h1>
     <div class="spacer"></div>
     <transition name="modal" tag="div">
@@ -13,28 +17,26 @@
       </UIModalWind>
     </transition>
     <br />
-    <div class="handling-blocks-wrapper flex-jcsb">
-      <div class="handling-block-1 flex-jcl">
-        <h2 class="handling-block-1__title">POSTS</h2>
+    <div class="dash-brd-wrapper flex-jcsb">
+      <div class="dash-brd-1 flex-jcl">
+        <h2 class="dash-brd-1__title">POSTS</h2>
         <UICommonButton
           @click="isModalShow = !isModalShow"
-          class="handling-block-1__btn"
+          class="dash-brd-1__btn"
           >Create new post
         </UICommonButton>
         <UIAnimatedLoader
           v-if="isLoading"
-          class="handling-block-1__loader"
+          class="dash-brd-1__loader"
         ></UIAnimatedLoader>
       </div>
-      <div class="handling-block-2 flex-jcr">
-        <UISearchInput
-          v-model:search="searchTXT"
-          class="handling-block-2__search"
-        />
-        <UISelectOption
-          v-model:selectedValue="selected"
+      <div class="dash-brd-2 flex-jcr">
+        <UISearchInput v-model:search="searchTXT" class="dash-brd-2__search" />
+        <UICustomSelect
+          v-model:sortBy="sortBy"
           :options="optionsArr"
-          class="handling-block-2__select"
+          :clickTarget="clickTarget"
+          class="dash-brd-2__my-select"
         />
       </div>
     </div>
@@ -71,18 +73,19 @@ export default {
       ],
       posts: [],
       isLoading: true,
-      selected: 'title',
+      sortBy: 'title',
       optionsArr: [
         { prop: 'title', name: 'By title' },
         { prop: 'id', name: 'By ID' },
         { prop: 'body', name: 'By body' },
       ],
       searchTXT: '',
+      clickTarget: '',
     }
   },
   computed: {
     sortedPostList() {
-      const option = this.selected
+      const option = this.sortBy
       const sortString = (a, b) => a[option].localeCompare(b[option])
       const sortNum = (a, b) => a[option] - b[option]
       const arr = [...this.posts]
@@ -117,6 +120,7 @@ export default {
         this.posts = this.posts.filter(p => p.id !== post.id)
       }
     },
+
     async fetchPosts() {
       try {
         this.isLoading = true
@@ -166,39 +170,28 @@ h3#alert-msg {
   text-align: center;
   margin-top: 2rem;
 }
-.handling-block-1 {
+.dash-brd-1 {
   flex: 1 0 50%;
 }
-.handling-block-1__title {
+.dash-brd-1__title {
   flex: 0 0 150px;
 }
-.handling-block-1__btn {
+.dash-brd-1__btn {
   flex: 0 0 180px;
 }
-.handling-block-1__loader {
+.dash-brd-1__loader {
   flex: 1 0 auto;
   margin-left: 2rem;
 }
-.handling-block-2 {
+.dash-brd-2 {
   flex: 1 0 auto;
-  gap: 1rem;
+  gap: 2rem;
 }
-.handling-block-2__search {
-  flex: 0 0 60%;
+.dash-brd-2__search {
+  flex: 1 1 auto;
 }
-.handling-block-2__select {
-  flex: 1 0 auto;
-  position: relative;
-}
-.handling-block-2__select:hover:after {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 10px;
-  height: 104%;
-  top: -1px;
-  right: 20px;
-  background-color: coral;
+.dash-brd-2__my-select {
+  flex: 1 0 40%;
 }
 .post-form-wrapper {
   position: fixed;

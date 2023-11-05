@@ -4,8 +4,10 @@ import UITextInput from './UITextInput'
 import UITextArea from './UITextArea'
 import UIModalWind from './UIModalWind'
 import UIAnimatedLoader from './UIAnimatedLoader'
-import UISelectOption from './UISelectOption'
 import UISearchInput from './UISearchInput '
+import UICustomSelect from './UICustomSelect'
+import UIArrowDown from './UIArrowDown'
+import UIArrowUp from './UIArrowUp'
 
 export default [
   UICommonButton,
@@ -14,6 +16,8 @@ export default [
   UITextArea,
   UIModalWind,
   UIAnimatedLoader,
-  UISelectOption,
   UISearchInput,
+  UICustomSelect,
+  UIArrowDown,
+  UIArrowUp,
 ]

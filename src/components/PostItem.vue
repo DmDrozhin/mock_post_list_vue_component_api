@@ -1,12 +1,15 @@
 <template>
-  <div class="flex-block">
-    <div class="post">
-      <div>
-        <strong>{{ post.title }}</strong>
+  <div class="post flex-jcsb">
+    <div class="post__content">
+      <div class="post__title-wrapper flex-jcl">
+        <div class="post__id">{{ post.id }}</div>
+        <div class="post__title">
+          <strong>{{ post.title }}</strong>
+        </div>
       </div>
-      <div>{{ post.body }}</div>
+      <div class="post__body">{{ post.body }}</div>
     </div>
-    <div class="btn-wrapper">
+    <div class="post__btn-wrapper">
       <UIDeleteButton @click="$emit('deletePost')" />
     </div>
   </div>
@@ -33,17 +36,19 @@ export default {
 </script>
 
 <style scoped>
-.post {
+@import '@/styles/style.css';
+.post__content {
   padding: 1rem;
   flex: 1 0 93%;
 }
-.flex-block {
-  display: flex;
-  justify-content: blex-between;
-  align-items: center;
+.post__title-wrapper {
   gap: 1rem;
 }
-.btn-wrapper {
+.post__id {
+  background-color: var(--btn-bg-color-hover);
+  padding: 0.2rem 0.7rem;
+}
+.post__btn-wrapper {
   flex: 1 0 auto;
 }
 </style>

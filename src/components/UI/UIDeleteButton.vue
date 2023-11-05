@@ -15,11 +15,10 @@ export default {
 
 <style scoped>
 .btn-delete {
-  box-sizing: content-box;
   font-size: 0.7rem;
   font-weight: 700;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.7rem;
+  height: 1.7rem;
   background-color: transparent;
   border: 1.5px solid #fff;
   color: #fff;
@@ -30,10 +29,10 @@ export default {
   content: '';
   display: block;
   position: absolute;
-  top: -2px;
-  right: -9px;
-  width: 7px;
-  height: 115%;
+  top: -1.5px;
+  right: -10px;
+  width: 8px;
+  height: calc(100% + 3px);
   background-color: coral;
 }
 </style>

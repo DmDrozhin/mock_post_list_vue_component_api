@@ -1,9 +1,11 @@
-  :root {    
+  :root {
+    /* variables */
     --main-bg-color: #565656;
     --btn-bg-color: #9d93e1;
     --btn-bg-color-hover:  #685ea9;
     --alert-txt-color:  rgb(255, 129, 154);
     --hr-color: #7d9e43;
+    --main-brd-width: 1px;
   }
   
   * {
@@ -39,6 +41,16 @@
   h3 {
     font-size: 1.5rem;
     letter-spacing: 0.1rem;
+  }
+  button {
+    border: none;
+    outline: none;
+    background: none;
+  }
+  input {
+    border: none;
+    outline: none;
+    background: none;
   }
 
   .flex-jcsb {
