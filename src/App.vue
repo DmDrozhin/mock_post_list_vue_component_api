@@ -16,8 +16,9 @@
       </div>
       <div class="header__spacer spacer"></div>
     </header>
-
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -46,15 +47,7 @@ export default {
 
 <style scoped>
 @import './styles/style.css';
-/* .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-} */
 
-.header {
-  flex: 0 0 auto;
-}
 .header__title-wrapper {
   gap: 1rem;
 }
