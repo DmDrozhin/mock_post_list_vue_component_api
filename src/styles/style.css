@@ -6,6 +6,7 @@
     --alert-txt-color:  rgb(255, 129, 154);
     --hr-color: #7d9e43;
     --main-brd-width: 1px;
+    --semi-transp-bg: #000000b6;
   }
   
   * {
@@ -21,7 +22,7 @@
     line-height: 1.5;
   }
   .container {
-    height: 100vh;
+    min-height: 100vh;
     padding: 1rem;
     max-width: 1280px;
     margin: 0 auto;
@@ -29,7 +30,10 @@
     /* background-color: #565656; */
     color: #fff;
   }
-
+  /* .container.inactive {
+    pointer-events: none;
+    overflow: hidden;
+  } */
   h1 {
     font-size: 2.5rem;
     letter-spacing: 0.3rem;
@@ -51,6 +55,14 @@
     border: none;
     outline: none;
     background: none;
+  }
+  a,
+  a:visited,
+  a:link,
+  a:hover,
+  a:active {
+    text-decoration: none;
+    color: #fff;
   }
 
   .flex-jcsb {

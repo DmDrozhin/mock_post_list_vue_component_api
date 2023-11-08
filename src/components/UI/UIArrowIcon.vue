@@ -1,6 +1,7 @@
 <template>
-  <div class="arrow-up" @click="handleClick">
+  <div class="arrow-icon" @click="handleClick">
     <svg
+      class="arrow-icon-svg"
       fill="#ffffff"
       height="25px"
       width="25px"
@@ -11,7 +12,7 @@
       viewBox="0 0 512.00 512.00"
       xml:space="preserve"
       stroke="#ffffff"
-      transform="matrix(1, 0, 0, -1, 0, 0)"
+      :transform="arrowDirection"
       stroke-width="0.00512"
     >
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -42,7 +43,10 @@
 
 <script>
 export default {
-  name: 'UIArrowUp',
+  name: 'UIArrowIcon',
+  props: {
+    arrowDirection: { type: String, default: 'rotate(90)', required: true },
+  },
   data() {
     return {}
   },
@@ -55,7 +59,7 @@ export default {
 </script>
 
 <style scoped>
-.arrow-up {
+.arrow-icon {
   /* border: 1px solid teal; */
   display: flex;
   justify-content: center;
@@ -64,6 +68,7 @@ export default {
 }
 svg {
   min-height: 100%;
+  z-index: -1;
   /* border: 1px solid rgb(9, 0, 128); */
 }
 </style>

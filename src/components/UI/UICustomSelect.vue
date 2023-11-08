@@ -5,8 +5,7 @@
         {{ placeholder }}
       </div>
       <div class="select__icon">
-        <UIArrowDown v-if="!isDropDownListOpen" />
-        <UIArrowUp v-if="isDropDownListOpen" />
+        <UIArrowIcon :arrowDirection="arrowDirection" />
       </div>
     </div>
     <ul class="select__dropdown-list options-list" v-if="isDropDownListOpen">
@@ -23,6 +22,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'UICustomSelect',
   data() {
@@ -33,11 +33,9 @@ export default {
   props: {
     sortBy: { type: String },
     options: { type: Array, default: () => [] },
-    clickTarget: { type: String, default: '' },
   },
   watch: {
-    clickTarget(trg) {
-      // Select element ev.target.className = 'select__dashboard flex-jcsb' && 'option-item'
+    CLICKED_ELEMENT(trg) {
       const clsName = 'option-item'
       if (this.isDropDownListOpen && trg !== clsName) {
         this.toggleOptionsList()
@@ -45,8 +43,13 @@ export default {
     },
   },
   computed: {
+    ...mapGetters(['CLICKED_ELEMENT']),
+
     placeholder() {
       return this.options.find(el => el.prop === this.sortBy).name
+    },
+    arrowDirection() {
+      return this.isDropDownListOpen ? 'rotate(180)' : 'rotate(0)'
     },
   },
   methods: {
@@ -109,7 +112,7 @@ export default {
   border: 1px solid rgb(178, 178, 178);
   border-bottom: none;
   padding: 0.5rem 1rem;
-  background-color: #000000b6;
+  background-color: var(--semi-transp-bg);
   position: relative;
   z-index: 1;
 }

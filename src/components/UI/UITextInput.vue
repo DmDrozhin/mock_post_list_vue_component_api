@@ -7,8 +7,8 @@
       type="text"
       id="text_input"
       :placeholder="label"
-      v-model.trim.lazy="enteredData"
-      :style="`height: ${height}rem`"
+      :value="textInputValue"
+      @change="handleInput($event)"
     />
   </div>
 </template>
@@ -18,26 +18,19 @@ export default {
   name: 'UITextInput',
   props: {
     label: { type: String, default: '' },
-    height: { type: Number, default: 3 },
-    title: { type: String || Number, default: String },
+    textInputValue: { type: String || Number, default: '' },
   },
   data() {
-    return {
-      enteredData: '',
-    }
+    return {}
   },
-  watch: {
-    enteredData(d) {
-      this.$emit('changed', d)
-    },
-    clearForm(b) {
-      if (b) {
-        this.enteredData = ''
-        this.$emit('filedCleared')
+  watch: {},
+  methods: {
+    handleInput(ev) {
+      if (ev) {
+        this.$emit('update:textInputValue', ev.target.value)
       }
     },
   },
-  methods: {},
 }
 </script>
 
@@ -47,10 +40,11 @@ label {
 }
 input {
   border: none;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   min-width: 100%;
   border-radius: 0.3rem;
   position: relative;
+  background-color: #fff;
 }
 input:focus {
   border: none;

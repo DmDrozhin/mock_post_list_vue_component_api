@@ -8,26 +8,18 @@
     <hr style="margin: 0 0 1rem 0" />
     <form class="new-post__post-form" @submit.prevent name="post-form">
       <UITextInput
-        v-model:title="newPost.title"
-        class="text-input"
+        v-model:textInputValue="newPost.title"
         :label="'Post title'"
-        :height="2.5"
-        :clearForm="isTimeToClearFrom"
-        @changed="newPost.title = $event"
-        @filedCleared="setTimeToClearFrom"
+        class="text-input"
       />
       <UITextArea
-        v-model:body="newPost.body"
-        class="text-area"
+        v-model:textAreaValue="newPost.body"
         :label="'Post message'"
-        :rows="4"
-        :cols="50"
-        :clearForm="isTimeToClearFrom"
-        @changed="newPost.body = $event"
-        @filedCleared="setTimeToClearFrom"
+        :rows="5"
+        class="text-area"
       />
 
-      <UICommonButton class="btn" @buttonAction="makeNewPost"
+      <UICommonButton class="btn" @buttonClick="makeNewPost"
         >Create post</UICommonButton
       >
     </form>
@@ -54,11 +46,6 @@ export default {
         return
       }
     },
-    setTimeToClearFrom() {
-      if (this.isTimeToClearFrom) {
-        this.isTimeToClearFrom = false
-      }
-    },
   },
 }
 </script>
@@ -66,6 +53,7 @@ export default {
 <style scoped>
 @import '@/styles/style.css';
 .new-post {
+  z-index: 100;
   position: relative;
   border: 1px solid #fff;
   padding: 2rem;

@@ -6,8 +6,8 @@ import UIModalWind from './UIModalWind'
 import UIAnimatedLoader from './UIAnimatedLoader'
 import UISearchInput from './UISearchInput '
 import UICustomSelect from './UICustomSelect'
-import UIArrowDown from './UIArrowDown'
-import UIArrowUp from './UIArrowUp'
+import UIArrowIcon from './UIArrowIcon'
+import UIPagePicker from './UIPagePicker'
 
 export default [
   UICommonButton,
@@ -18,6 +18,6 @@ export default [
   UIAnimatedLoader,
   UISearchInput,
   UICustomSelect,
-  UIArrowDown,
-  UIArrowUp,
+  UIArrowIcon,
+  UIPagePicker,
 ]

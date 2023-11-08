@@ -79,7 +79,7 @@ export default {
 .search {
   position: relative;
   border: var(--main-brd-width) solid #fff;
-  gap: 0.5rem;
+  /* gap: 0.5rem; */
 }
 .search:hover::before {
   content: '';
@@ -101,7 +101,7 @@ export default {
   color: #fff;
 }
 .search__input:focus {
-  background-color: #00000037;
+  background-color: #ffffff37;
 }
 .search__btn-wrapper {
   flex: 1 0 auto;

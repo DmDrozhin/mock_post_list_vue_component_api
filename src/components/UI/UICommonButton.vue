@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn-common" @click="toButtonAction()">
+    <button class="btn-common" @click="handleClick()">
       <slot name="default"></slot>
     </button>
   </div>
@@ -13,8 +13,8 @@ export default {
     return {}
   },
   methods: {
-    toButtonAction() {
-      this.$emit('buttonAction')
+    handleClick() {
+      this.$emit('buttonClick')
     },
   },
 }

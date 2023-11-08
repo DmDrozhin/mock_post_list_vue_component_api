@@ -50,8 +50,8 @@ export default {
 }
 .post-list-enter-from,
 .post-list-leave-to {
-  /* opacity: 0; */
-  transform: translateX(100%);
+  opacity: 0;
+  transform: translateX(-100%);
 }
 .post-list-move {
   transition: transform 0.5s ease;
