@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunk_2023_10_26_vue3_mock_project"]=self["webpackChunk_2023_10_26_vue3_mock_project"]||[]).push([[713],{8713:function(e,t,u){u.r(t),u.d(t,{default:function(){return l}});var n=u(3396),r=u(7139);function _(e,t,u,_,c,a){return(0,n.wg)(),(0,n.iD)("div",null,[(0,n._)("h1",null,(0,r.zw)(c.title),1)])}var c={name:"AboutPage",data(){return{title:"About"}}},a=u(89);const o=(0,a.Z)(c,[["render",_]]);var l=o}}]);
+//# sourceMappingURL=713.15fa52d0.js.map
