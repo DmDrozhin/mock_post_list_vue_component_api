@@ -60,7 +60,16 @@
           :totalPages="postsPagesQt"
         />
       </div>
-      <div class="intersection-target" ref="intersection"></div>
+
+      <div class="intersection" ref="intersection">
+        <h1>intercepting block</h1>
+        <div class="wrapper flex-jcl">
+          <div class="intersection__arrow-icon">
+            <UIArrowIcon :arrowDirection="'rotate(0)'" />
+          </div>
+          <p>scroll down to get the next page</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -267,8 +276,16 @@ h3#alert-msg {
 footer {
   margin-top: 1rem;
 }
-.intersection-target {
+.intersection {
   height: 10rem;
   background-color: #7b6767;
+  display: grid;
+  place-content: center;
+  margin-top: 1rem;
+}
+.intersection__arrow-icon {
+  display: inline-block;
+  margin-right: 1rem;
+  z-index: 1;
 }
 </style>
