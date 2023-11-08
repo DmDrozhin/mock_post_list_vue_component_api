@@ -18,6 +18,9 @@ export default createStore({
   },
 
   actions: {
+    GET_POSTS_FROM_SERVER({ commit }) {
+      commit()
+    },
     ACTION_SET_CLICKED_ELEMENT({ commit }, payload) {
       commit('SET_CLICKED_ELEMENT', payload)
     },

@@ -17,6 +17,11 @@ const routes = [
     name: 'about',
     component: () => import('@/pages/AboutPage.vue'),
   },
+  {
+    path: '/post/:id',
+    name: 'post',
+    component: () => import('@/pages/SinglePostPage.vue'),
+  },
   // {
   //   path: '/about',
   //   name: 'about',

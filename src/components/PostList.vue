@@ -8,6 +8,7 @@
           :key="post.id"
           :post="post"
           @deletePost="$emit('deletePost', post)"
+          @click="this.$router.push({ path: `/post/${post.id}` })"
         />
       </transition-group>
     </div>

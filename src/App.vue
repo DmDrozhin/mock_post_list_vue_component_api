@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container"
+    class="app container"
     @click.capture="setClickedElementClass($event.target.className)"
   >
     <header class="header">
@@ -16,9 +16,11 @@
       </div>
       <div class="header__spacer spacer"></div>
     </header>
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
   </div>
 </template>
 
@@ -42,6 +44,7 @@ export default {
       this.ACTION_SET_CLICKED_ELEMENT(className)
     },
   },
+  mounted() {},
 }
 </script>
 

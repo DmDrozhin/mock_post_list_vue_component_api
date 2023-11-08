@@ -9,7 +9,8 @@
       </div>
     </UIModalWind>
   </transition>
-  <div class="main-wrapper">
+
+  <div class="main-wrapper" v-intersection>
     <div class="main">
       <br />
       <div class="dash-brd-wrapper flex-jcsb">
@@ -39,28 +40,38 @@
         </div>
       </div>
       <br />
-      <div>
+      <!-- ALERT MESSAGE -->
+      <transition-group name="message" tag="div">
+        <div class="alert-message-wrapper" :key="Date()">
+          <h3
+            v-if="!isLoading && filteredPostList.length <= 0"
+            class="alert-message"
+            :key="Date()"
+          >
+            There is no message to show
+          </h3>
+        </div>
+      </transition-group>
+
+      <!-- POST LIST BLOCK -->
+      <div v-if="filteredPostList.length > 0">
         <post-list
           v-if="!isLoading"
           :posts="filteredPostList"
           @deletePost="deletePost($event)"
         ></post-list>
       </div>
-      <transition name="alert-msg">
-        <h3 class="slide-message" v-if="filteredPostList.length <= 0">
-          There is no message to show
-        </h3>
-      </transition>
     </div>
 
     <div class="footer">
+      <!-- PAGE PICKER -->
       <div>
         <UIPagePicker
           v-model:currentPage="postsCurrentPage"
           :totalPages="postsPagesQt"
         />
       </div>
-
+      <!-- INTERSECTION BLOCK -->
       <div class="intersection" ref="intersection">
         <h1>intercepting block</h1>
         <div class="wrapper flex-jcl">
@@ -242,32 +253,44 @@ export default {
   margin-top: 20%;
   width: fit-content;
 }
-/* .modal {
-  display: inline-block;
-  margin-right: 10px;
-} */
-.alert-msg-enter-active,
-.alert-msg-leave-active,
+
+/* MODAL BLOCK */
+.modal-move {
+  transition: transform 0.5sec ease;
+}
+
 .modal-enter-active,
 .modal-leave-active {
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
 }
-.alert-msg-enter-from,
-.alert-msg-leave-to,
 .modal-enter-from,
 .modal-leave-to {
   opacity: 0;
   transform: translateX(-100%);
 }
-.alert-msg-move,
-.modal-move,
-.slide-message {
-  transition: transform 0.5sec ease;
+
+/* SLIDE MESSAGE */
+.message-enter-active,
+.message-leave-active {
+  transition: opacity 0.3s linear;
 }
-.slide-message {
+.message-enter-from,
+.message-leave-to {
+  opacity: 0;
+}
+.message-enter-to,
+.message-leave-from {
+  opacity: 1;
+}
+.alert-message-wrapper {
+  position: absolute;
+  left: 50%;
+}
+.alert-message {
+  position: relative;
+  left: -50%;
   color: coral;
-  text-align: center;
-  transform: translateY(2rem);
+  transform: translateY(3rem);
 }
 
 footer {
