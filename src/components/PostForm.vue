@@ -69,8 +69,15 @@ export default {
 }
 .alert-msg {
   color: var(--alert-txt-color);
+  text-align: center;
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+h3#alert-msg {
+  color: coral;
+  text-align: center;
+  margin-top: 2rem;
 }
 .new-post__post-form {
   display: flex;

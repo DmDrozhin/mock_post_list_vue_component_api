@@ -22,16 +22,7 @@ export default {
   data() {
     return {}
   },
-  methods: {
-    // aksUser(title) {
-    //   return confirm(`Do you want to delete the post: *** ${title} ***?`)
-    // },
-    // deletePost(id, title) {
-    //   if (this.aksUser(title)) {
-    //     this.$emit('deletePost', id)
-    //   }
-    // },
-  },
+  methods: {},
 }
 </script>
 

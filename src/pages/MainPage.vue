@@ -47,7 +47,7 @@
         ></post-list>
       </div>
       <transition name="alert-msg">
-        <h3 v-if="filteredPostList.length <= 0" id="alert-msg">
+        <h3 class="slide-message" v-if="filteredPostList.length <= 0">
           There is no message to show
         </h3>
       </transition>
@@ -104,7 +104,7 @@ export default {
       postsTotalQt: null,
       postsPagesQt: null,
       postsCurrentPage: 1,
-      postsPerPage: 20,
+      postsPerPage: 10,
       postsNewPostCounter: null,
     }
   },
@@ -211,16 +211,6 @@ export default {
   justify-content: space-between;
   min-height: 100vh;
 }
-
-footer {
-  flex: 0 0 auto;
-}
-
-h3#alert-msg {
-  color: coral;
-  text-align: center;
-  margin-top: 2rem;
-}
 .dash-brd-1 {
   flex: 1 0 50%;
 }
@@ -270,9 +260,16 @@ h3#alert-msg {
   transform: translateX(-100%);
 }
 .alert-msg-move,
-.modal-move {
+.modal-move,
+.slide-message {
   transition: transform 0.5sec ease;
 }
+.slide-message {
+  color: coral;
+  text-align: center;
+  transform: translateY(2rem);
+}
+
 footer {
   margin-top: 1rem;
 }

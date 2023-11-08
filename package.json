@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "gh-pages -d dist"
+    "deploy": "concurrently \"git add dist\" \"git commit -m 'adding dist subtree'\" \"git subtree push --prefix dist origin gh-pages\""
   },
   "dependencies": {
     "core-js": "^3.8.3",
@@ -23,6 +23,7 @@
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "axios": "^1.6.0",
+    "concurrently": "^8.2.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -54,7 +55,7 @@
     "jsxSingleQuote": true,
     "arrowParens": "avoid",
     "semi": false,
-    "endOfLine": "auto"    
+    "endOfLine": "auto"
   },
   "browserslist": [
     "> 1%",
