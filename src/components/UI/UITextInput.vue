@@ -9,6 +9,7 @@
       :placeholder="label"
       :value="textInputValue"
       @change="handleInput($event)"
+      @focus="this.$emit('focused')"
     />
   </div>
 </template>

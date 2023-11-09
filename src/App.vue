@@ -1,26 +1,28 @@
 <template>
   <div
-    class="app container"
+    class="app"
     @click.capture="setClickedElementClass($event.target.className)"
   >
-    <header class="header">
-      <div class="header__wrapper flex-jcsb">
-        <router-link to="/">
-          <div class="header__title-wrapper flex-jcl">
-            <div class="header__icon"></div>
-            <h1 class="header__title">{{ title.toUpperCase() }}</h1>
-          </div>
-        </router-link>
+    <div class="container">
+      <header class="header">
+        <div class="header__wrapper flex-jcsb">
+          <router-link to="/">
+            <div class="header__title-wrapper flex-jcl">
+              <div class="header__icon"></div>
+              <h1 class="header__title">{{ title.toUpperCase() }}</h1>
+            </div>
+          </router-link>
 
-        <div><NavMenu /></div>
-      </div>
-      <div class="header__spacer spacer"></div>
-    </header>
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
+          <div><NavMenu /></div>
+        </div>
+        <div class="header__spacer spacer"></div>
+      </header>
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
+    </div>
   </div>
 </template>
 

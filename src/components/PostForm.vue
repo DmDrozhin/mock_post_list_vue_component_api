@@ -1,26 +1,38 @@
 <template>
   <div class="new-post">
-    <UICloseButton
-      @click.prevent="$emit('closeModal')"
-      class="new-post__del-btn"
-    />
-    <h2>New post</h2>
+    <!-- THE FROM HEADER -->
+    <div class="new-post__header flex-jcsb">
+      <div class="new-post__title-block flex-jcl">
+        <UIMainIcon :size="45" />
+        <h2>{{ title }}</h2>
+      </div>
+      <UICloseButton
+        @click.prevent="closeModalWindow"
+        class="new-post__del-btn"
+      />
+    </div>
+
     <div class="alert-div">
       <p class="alert-msg">{{ alertMessage }}</p>
     </div>
+
     <hr style="margin: 0 0 1rem 0" />
+
+    <!-- THE FORM -->
     <form class="new-post__post-form" @submit.prevent name="post-form">
       <UITextInput
-        v-focus-element.ggg:uuu="true"
+        v-focus-element
         v-model:textInputValue="newPost.title"
         :label="'Post title'"
         class="text-input"
+        @focused="alert(false)"
       />
       <UITextArea
         v-model:textAreaValue="newPost.body"
         :label="'Post message'"
         :rows="5"
         class="text-area"
+        @focused="alert(false)"
       />
 
       <UICommonButton class="btn" @buttonClick="makeNewPost"
@@ -31,22 +43,45 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'PostForm',
   data() {
     return {
+      title: 'New post',
       newPost: { id: { type: Number, required: true }, title: '', body: '' },
       alertMessage: '',
     }
   },
+  computed: {
+    ...mapGetters(['CLICKED_ELEMENT']),
+  },
+  watch: {
+    CLICKED_ELEMENT(val) {
+      if (val === 'modal-window') {
+        this.closeModalWindow()
+      }
+    },
+  },
   methods: {
+    closeModalWindow() {
+      this.$emit('closeModal')
+    },
+    alert(val) {
+      val
+        ? (this.alertMessage = 'Fill out both fields!')
+        : (this.alertMessage = '')
+    },
+    emptyPost() {
+      this.newPost = { id: '', title: '', body: '' }
+    },
     makeNewPost() {
       this.alertMessage = ''
       if (this.newPost.title && this.newPost.body) {
         this.$emit('newPost', this.newPost)
-        this.newPost = { id: '', title: '', body: '' }
+        this.emptyPost()
       } else {
-        this.alertMessage = '! Please fill out text fields !'
+        this.alert(true)
         return
       }
     },
@@ -63,10 +98,11 @@ export default {
   padding: 2rem;
   background-color: var(--main-bg-color);
 }
+.new-post__header {
+  gap: 1rem;
+}
 .new-post__del-btn {
-  position: absolute;
-  right: 2rem;
-  top: 2rem;
+  align-self: self-start;
 }
 .alert-div {
   height: 2rem;
@@ -75,6 +111,7 @@ export default {
   color: var(--alert-txt-color);
   text-align: center;
   font-size: 1.2rem;
+  letter-spacing: 1.5px;
   font-weight: 600;
 }
 

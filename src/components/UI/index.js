@@ -12,6 +12,7 @@ import UIPagePicker from './UIPagePicker'
 import UIArrowIcon from './SVG/UIArrowIcon'
 import UICrossIcon from './SVG/UICrossIcon'
 import UIDeleteIcon from './SVG/UIDeleteIcon'
+import UIMainIcon from './SVG/UIMainIcon'
 
 export default [
   UICommonButton,
@@ -27,4 +28,5 @@ export default [
   UIArrowIcon,
   UICrossIcon,
   UIDeleteIcon,
+  UIMainIcon,
 ]

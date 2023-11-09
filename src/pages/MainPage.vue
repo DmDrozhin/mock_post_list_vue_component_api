@@ -162,7 +162,7 @@ export default {
       }
     },
     deletePost(post) {
-      const conf = confirm('Do you really want to delete the post?')
+      const conf = confirm('Delete the post?')
       if (conf) {
         this.posts = this.posts.filter(p => p.id !== post.id)
       }

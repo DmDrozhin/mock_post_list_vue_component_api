@@ -9,6 +9,7 @@
       @change="handleTextArea($event)"
       :placeholder="label"
       :rows="rows"
+      @focus="this.$emit('focused')"
     ></textarea>
   </div>
 </template>
