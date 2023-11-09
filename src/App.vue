@@ -8,7 +8,7 @@
         <div class="header__wrapper flex-jcsb">
           <router-link to="/">
             <div class="header__title-wrapper flex-jcl">
-              <div class="header__icon"></div>
+              <UIMainIcon :size="80" class="header__icon" />
               <h1 class="header__title">{{ title.toUpperCase() }}</h1>
             </div>
           </router-link>
@@ -57,11 +57,7 @@ export default {
   gap: 1rem;
 }
 .header__icon {
-  width: 4rem;
-  height: 4rem;
-  background-image: url('@/icons/main-icon.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
+  z-index: 1;
 }
 .header__title {
   position: relative;

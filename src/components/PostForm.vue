@@ -1,13 +1,13 @@
 <template>
   <div class="new-post">
     <!-- THE FROM HEADER -->
-    <div class="new-post__header flex-jcsb">
+    <div class="new-post__header">
       <div class="new-post__title-block flex-jcl">
         <UIMainIcon :size="45" />
         <h2>{{ title }}</h2>
       </div>
       <UICloseButton
-        @click.prevent="closeModalWindow"
+        @click.prevent.stop="hideModal"
         class="new-post__del-btn"
       />
     </div>
@@ -59,12 +59,12 @@ export default {
   watch: {
     CLICKED_ELEMENT(val) {
       if (val === 'modal-window') {
-        this.closeModalWindow()
+        this.hideModal()
       }
     },
   },
   methods: {
-    closeModalWindow() {
+    hideModal() {
       this.$emit('closeModal')
     },
     alert(val) {
@@ -99,10 +99,13 @@ export default {
   background-color: var(--main-bg-color);
 }
 .new-post__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 1rem;
 }
-.new-post__del-btn {
-  align-self: self-start;
+.new-post__title-block {
+  gap: 1rem;
 }
 .alert-div {
   height: 2rem;
@@ -113,12 +116,6 @@ export default {
   font-size: 1.2rem;
   letter-spacing: 1.5px;
   font-weight: 600;
-}
-
-h3#alert-msg {
-  color: coral;
-  text-align: center;
-  margin-top: 2rem;
 }
 .new-post__post-form {
   display: flex;
