@@ -3,7 +3,7 @@
     <div class="posts">
       <transition-group name="post-list">
         <PostItem
-          class="posts"
+          class="post-item"
           v-for="post in posts"
           :key="post.id"
           :post="post"
@@ -34,11 +34,14 @@ export default {
 </script>
 
 <style scoped>
-.posts {
+.post-item {
   border: 1px solid #a2c0a7;
   border-bottom: none;
 }
-.posts:last-child {
+.post-item:hover {
+  background-color: var(--semi-transp-bg);
+}
+.post-item:last-child {
   border-bottom: 1px solid #a2c0a7;
 }
 /* .post-list-item {

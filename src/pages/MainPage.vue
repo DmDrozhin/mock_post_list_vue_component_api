@@ -10,7 +10,7 @@
     </UIModalWind>
   </transition>
 
-  <div class="main-wrapper" v-intersection>
+  <div class="main-wrapper">
     <div class="main">
       <br />
       <div class="dash-brd-wrapper flex-jcsb">
@@ -72,7 +72,7 @@
         />
       </div>
       <!-- INTERSECTION BLOCK -->
-      <div class="intersection" ref="intersection">
+      <div class="intersection" v-intersection="scrollNextPage">
         <h1>intercepting block</h1>
         <div class="wrapper flex-jcl">
           <div class="intersection__arrow-icon">
@@ -190,26 +190,10 @@ export default {
         throw new Error(`Fetching error: ${er}`)
       }
     },
-
-    infiniteScroll() {
-      const options = { rootMargin: '0px', threshold: 1.0 }
-      const target = this.$refs.intersection
-      const callback = entries => {
-        setTimeout(() => {
-          if (entries[0].isIntersecting) {
-            console.log('Crossed')
-            this.scrollNextPage()
-          }
-        }, 500)
-      }
-      const observer = new IntersectionObserver(callback, options)
-      observer.observe(target)
-    },
   },
 
   mounted() {
     this.fetchPosts()
-    this.infiniteScroll()
   },
 }
 </script>

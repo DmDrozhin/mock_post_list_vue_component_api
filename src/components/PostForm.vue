@@ -8,6 +8,7 @@
     <hr style="margin: 0 0 1rem 0" />
     <form class="new-post__post-form" @submit.prevent name="post-form">
       <UITextInput
+        v-focus-element.ggg:uuu="true"
         v-model:textInputValue="newPost.title"
         :label="'Post title'"
         class="text-input"

@@ -1,3 +1,4 @@
 import VIntersection from './VIntersection.js'
+import VFocusElement from './VFocusElement.js'
 
-export default [VIntersection]
+export default [VIntersection, VFocusElement]
