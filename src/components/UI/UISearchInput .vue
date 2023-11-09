@@ -31,9 +31,7 @@ export default {
   },
   methods: {
     handleRequest(ev) {
-      if (ev) {
-        this.$emit('update:search', ev)
-      }
+      this.$emit('update:search', ev)
     },
   },
 }

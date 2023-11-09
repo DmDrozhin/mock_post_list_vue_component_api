@@ -148,11 +148,10 @@ export default {
     // eslint-disable-next-line vue/return-in-computed-property
     filteredPostList() {
       const query = this.searchTXT.toLowerCase()
+      const arr = [...this.sortedPostList]
       if (query) {
-        return this.sortedPostList.filter(post =>
-          post.title.toLowerCase().includes(query)
-        )
-      } else return this.sortedPostList
+        return arr.filter(p => p.title.toLowerCase().includes(query))
+      } else return arr
     },
   },
   methods: {
