@@ -13,6 +13,7 @@ import UIArrowIcon from './SVG/UIArrowIcon'
 import UICrossIcon from './SVG/UICrossIcon'
 import UIDeleteIcon from './SVG/UIDeleteIcon'
 import UIMainIcon from './SVG/UIMainIcon'
+import UISearchIcon from './SVG/UISearchIcon'
 
 export default [
   UICommonButton,
@@ -29,4 +30,5 @@ export default [
   UICrossIcon,
   UIDeleteIcon,
   UIMainIcon,
+  UISearchIcon,
 ]

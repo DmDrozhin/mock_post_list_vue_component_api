@@ -1,4 +1,5 @@
 <template>
+  <!-- SLIDING POST FORM -->
   <transition name="modal" tag="div">
     <UIModalWind v-if="isModalShow">
       <div class="post-form-wrapper">
@@ -9,11 +10,27 @@
       </div>
     </UIModalWind>
   </transition>
+  <!-- SLIDING ALERT MESSAGE -->
+
+  <transition name="modal" tag="div">
+    <UIModalWind v-if="!isLoading && filteredPostList.length <= 0">
+      <div class="alert-message-wrapper">
+        <h3 class="alert-message__txt">There is no message to show</h3>
+        <UICloseButton
+          :size="30"
+          class="alert-message__icon"
+          @click="clearSearch"
+        />
+      </div>
+    </UIModalWind>
+  </transition>
 
   <div class="main-wrapper">
     <div class="main">
       <br />
       <div class="dash-brd-wrapper flex-jcsb">
+        <!-- DASHBOARD -1- -->
+
         <div class="dash-brd-1 flex-jcl">
           <h2 class="dash-brd-1__title">POSTS</h2>
           <UICommonButton
@@ -26,6 +43,8 @@
             class="dash-brd-1__loader"
           ></UIAnimatedLoader>
         </div>
+        <!-- DASHBOARD -2- -->
+
         <div class="dash-brd-2 flex-jcr">
           <UISearchInput
             v-model:search="searchTXT"
@@ -40,18 +59,6 @@
         </div>
       </div>
       <br />
-      <!-- ALERT MESSAGE -->
-      <transition-group name="message" tag="div">
-        <div class="alert-message-wrapper" :key="Date()">
-          <h3
-            v-if="!isLoading && filteredPostList.length <= 0"
-            class="alert-message"
-            :key="Date()"
-          >
-            There is no message to show
-          </h3>
-        </div>
-      </transition-group>
 
       <!-- POST LIST BLOCK -->
       <div v-if="filteredPostList.length > 0">
@@ -149,6 +156,9 @@ export default {
     },
   },
   methods: {
+    clearSearch() {
+      this.searchTXT = ''
+    },
     scrollNextPage() {
       if (this.postsCurrentPage < this.postsPagesQt) {
         this.postsCurrentPage += 1
@@ -252,29 +262,17 @@ export default {
   opacity: 0;
   transform: translateX(-100%);
 }
-
-/* SLIDE MESSAGE */
-.message-enter-active,
-.message-leave-active {
-  transition: opacity 0.3s linear;
-}
-.message-enter-from,
-.message-leave-to {
-  opacity: 0;
-}
-.message-enter-to,
-.message-leave-from {
-  opacity: 1;
-}
 .alert-message-wrapper {
-  position: absolute;
-  left: 50%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.alert-message {
-  position: relative;
-  left: -50%;
-  color: coral;
-  transform: translateY(3rem);
+.alert-message__txt {
+  margin-right: 1rem;
+  color: var(--alert-txt-color);
+}
+.alert-message__icon {
 }
 
 footer {

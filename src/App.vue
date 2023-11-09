@@ -9,7 +9,7 @@
           <router-link to="/">
             <div class="header__title-wrapper flex-jcl">
               <UIMainIcon :size="80" class="header__icon" />
-              <h1 class="header__title">{{ title.toUpperCase() }}</h1>
+              <h1 class="header__title" v-upper-case>{{ title }}</h1>
             </div>
           </router-link>
 
