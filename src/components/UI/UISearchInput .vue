@@ -79,6 +79,7 @@ export default {
 .search {
   position: relative;
   border: var(--main-brd-width) solid #fff;
+  border-radius: var(--main-border-radius);
   /* gap: 0.5rem; */
 }
 .search:hover::before {

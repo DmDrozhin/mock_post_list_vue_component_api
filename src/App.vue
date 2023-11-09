@@ -57,7 +57,7 @@ export default {
 .header__icon {
   width: 4rem;
   height: 4rem;
-  background-image: url('@/img/nav-img.svg');
+  background-image: url('@/icons/main-icon.svg');
   background-repeat: no-repeat;
   background-size: cover;
 }

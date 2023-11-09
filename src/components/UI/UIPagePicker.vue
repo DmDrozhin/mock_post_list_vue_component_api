@@ -1,7 +1,7 @@
 <template>
   <div class="page-picker">
     <div class="arrow" @click="leftClick">
-      <UIArrowIcon :arrowDirection="'rotate(90)'" />
+      <UIArrowIcon :direction="'rotate(90)'" :size="30" />
     </div>
     <ul class="pages-qt-row">
       <li
@@ -15,7 +15,7 @@
       </li>
     </ul>
     <div class="arrow" @click="rightClick">
-      <UIArrowIcon :arrowDirection="'rotate(-90)'" />
+      <UIArrowIcon :direction="'rotate(-90)'" :size="30" />
     </div>
   </div>
 </template>

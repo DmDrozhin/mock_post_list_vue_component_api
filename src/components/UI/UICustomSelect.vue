@@ -1,11 +1,11 @@
 <template>
   <div class="ui-custom-select select" @click="toggleOptionsList">
-    <div class="select__dashboard flex-jcsb">
+    <div class="select__box flex-jcsb">
       <div class="select__output">
         {{ placeholder }}
       </div>
       <div class="select__icon">
-        <UIArrowIcon :arrowDirection="arrowDirection" />
+        <UIArrowIcon :direction="arrowDirection" :size="30" />
       </div>
     </div>
     <ul class="select__dropdown-list options-list" v-if="isDropDownListOpen">
@@ -80,22 +80,23 @@ export default {
   width: 10px;
   background-color: coral;
 }
-.select__dashboard {
+.select__box {
   max-width: 100%;
   max-height: 100%;
+  padding: 0.3rem 1rem;
   border: var(--main-brd-width) solid #fff;
+  border-radius: var(--main-border-radius);
   z-index: -1;
 }
 .select__output {
-  padding: 0.5rem 1rem;
-  flex: 1 0 80%;
   z-index: -1;
-  /* border: 2px solid rgb(114, 178, 17); */
+  /* border: 1px solid rgb(114, 178, 17); */
 }
 .select__icon {
-  flex: 1 0 20%;
   /* border: 1px solid rgb(255, 245, 47); */
   z-index: -1;
+  display: grid;
+  place-items: center;
 }
 
 /* DROPDOWN LIST */

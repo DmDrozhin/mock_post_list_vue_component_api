@@ -76,7 +76,7 @@
         <h1>intercepting block</h1>
         <div class="wrapper flex-jcl">
           <div class="intersection__arrow-icon">
-            <UIArrowIcon :arrowDirection="'rotate(0)'" />
+            <UIArrowIcon :direction="'rotate(0)'" :size="30" />
           </div>
           <p>scroll down to get the next page</p>
         </div>

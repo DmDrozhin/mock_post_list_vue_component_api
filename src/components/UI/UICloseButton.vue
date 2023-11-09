@@ -1,12 +1,12 @@
 <template>
-  <div class="btn-delete">
-    <UIDeleteIcon :size="'25px'" />
+  <div class="btn-close">
+    <UICrossIcon :size="'30px'" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'UIDeleteButton',
+  name: 'UICloseButton',
   data() {
     return {}
   },
@@ -14,14 +14,14 @@ export default {
 </script>
 
 <style lang="css">
-.btn-delete {
+.btn-close {
   width: 1.7rem;
   height: 1.7rem;
   background-color: transparent;
   position: relative;
   cursor: pointer;
 }
-.btn-delete:hover:after {
+.btn-close:hover:after {
   content: '';
   display: block;
   position: absolute;
@@ -31,13 +31,13 @@ export default {
   height: calc(100% + 3px);
   background-color: coral;
 }
-.btn-delete:hover:before {
-  content: 'delete';
+.btn-close:hover:before {
+  content: 'close';
   color: #fff;
   display: block;
   position: absolute;
-  top: -25px;
-  left: -10px;
+  top: -27px;
+  left: -4px;
   width: 8px;
   height: calc(100% + 3px);
 }

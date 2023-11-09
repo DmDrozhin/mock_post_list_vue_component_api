@@ -1,6 +1,9 @@
 <template>
   <div class="new-post">
-    <UIDeleteButton @click="$emit('closeModal')" class="new-post__del-btn" />
+    <UICloseButton
+      @click.prevent="$emit('closeModal')"
+      class="new-post__del-btn"
+    />
     <h2>New post</h2>
     <div class="alert-div">
       <p class="alert-msg">{{ alertMessage }}</p>
